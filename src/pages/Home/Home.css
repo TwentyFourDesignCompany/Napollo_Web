@@ -59,18 +59,37 @@
 }
 button {
   background: transparent;
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
+  transition: all .3s ease-in-out;
+}
+button:disabled{
+opacity: 0.6;
+}
+button:hover{
+  transform: scale(1.1);
+}
+button:focus{
+  outline: none !important;
 }
 .input-cont {
   display: flex;
   width: 500px !important;
   justify-content: center;
   width: 100%;
-
+  position: relative;
   border-radius: 20px;
   background-color: #555;
   margin-top: 20px;
+}
+.input-cont2{
+  width: 100%;
+  height: auto;
+}
+.email_icon{
+  position: absolute;
+  right: -22px;
+  top: 10px !important;
 }
 .banner_input {
   background: transparent;
@@ -85,6 +104,7 @@ button {
   text-transform: uppercase;
   margin-left: 10px;
   font-family: 'Gilroy-Medium';
+  
 }
 .banner_email_btn {
   background: #f68426;
