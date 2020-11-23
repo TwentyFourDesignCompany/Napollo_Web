@@ -12,8 +12,8 @@ const CarouselItem = ({img,text}) => {
 export default CarouselItem;
 
 const Carousel = styled.div`
-  max-width: 500px;
-  height: 300px;
+  max-width: 400px;
+  height: 200px;
   background: url(${(props) => props.img}) center/cover no-repeat;
   border-radius: 10px;
   position: relative;
@@ -26,5 +26,11 @@ margin: 0 auto;
       left: 0;
     
 
+  }
+  @media (max-width:768px){
+    height: 150px;
+    max-width: 300px;
+
+    
   }
 `;

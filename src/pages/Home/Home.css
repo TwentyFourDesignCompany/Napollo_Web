@@ -10,6 +10,7 @@
   padding-bottom: 30px;
   display: flex;
   align-items: center;
+  overflow-x: hidden !important;
 }
 
 @font-face {
@@ -25,7 +26,7 @@
   src: url("../../assets/fonts/Gilroy-Medium.ttf");
 }
 .banner_note {
-  font-size: 13px;
+  font-size: 11px;
   color: "#fff" !important;
   font-family: "Gilroy";
   font-style: normal;
@@ -35,9 +36,11 @@
 .banner_main {
   letter-spacing: 30px;
   font-family: "Gilroy-Bold";
+  font-size: 25px;
+  padding-left: 30px !important;
 }
 .home_carousel_text {
-  font-size: 20px;
+  font-size: 11px !important;
   font-family: "Gilroy";
   font-style: normal;
   font-weight: 500;
@@ -45,31 +48,36 @@
   color: "#fff" !important;
 }
 .carousel_main_container {
-  margin: 30px auto !important;
+  margin: 10px auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 10px !important;
 }
-/* .slider{
-  padding: 50px !important;
-} */
+.slider {
+  /* padding: 50px !important; */
+  border-radius: 10px !important;
+}
 
 .banner_subtitle {
   color: #f68426 !important;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: 3px;
-  margin-top: 100px !important;
+  margin-top: 40px !important;
 }
 button {
   background: transparent;
   border: none !important;
   outline: none !important;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-button:disabled{
-opacity: 0.6;
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
-button:hover{
+button:hover {
   transform: scale(1.1);
 }
-button:focus{
+button:focus {
   outline: none !important;
 }
 .input-cont {
@@ -81,30 +89,39 @@ button:focus{
   border-radius: 20px;
   background-color: #555;
   margin-top: 20px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
-.input-cont2{
+.input-cont2 {
   width: 100%;
   height: auto;
 }
-.email_icon{
+.email_icon {
   position: absolute;
   right: -22px;
   top: 10px !important;
 }
 .banner_input {
-  background: transparent;
+  background-color: #555;
   border: none !important;
   outline: none !important;
   width: 100%;
   height: inherit;
-  color: #feee3e;
+  color: #fff;
+  border-radius: 20px;
+
+  padding-left: 10px;
 }
+
 .banner_input::placeholder {
   font-size: 15px;
   text-transform: uppercase;
-  margin-left: 10px;
-  font-family: 'Gilroy-Medium';
-  
+  /* margin-left: 10px; */
+  font-family: "Gilroy-Medium";
+  padding-left: 10px;
+}
+.banner_input:focus {
+  background: transparent;
 }
 .banner_email_btn {
   background: #f68426;
@@ -114,12 +131,13 @@ button:focus{
   padding: 13px;
   width: 100px;
   align-self: flex-end;
-  margin-right: -15px;
+  cursor: pointer;
+  /* margin-right: -15px; */
 }
 .banner_footer_title {
   text-transform: uppercase;
-  font-size: 12px;
-  margin-top: 30px;
+  font-size: 11px;
+  margin-top: 20px;
   letter-spacing: 6px;
 }
 .banner_footer {
@@ -127,35 +145,111 @@ button:focus{
 }
 .icons {
   justify-self: center;
-  margin: 15px 20px;
+  margin: 10px 20px;
   transition: all 0.5s ease-in-out !important;
   cursor: pointer;
 }
 .icons:hover {
   color: #f68426 !important;
-  transform: translateY(-15px) !important;
+  transform: translateY(-5px) !important;
 }
 .slick-dots {
   display: flex;
   justify-content: center;
-  bottom: 40px;
-  margin: 0;
-  padding: 16px 0;
+  bottom: -18px !important;
+  margin: 0 !important;
+  padding: 5px 0 !important;
   list-style-type: none;
+ 
+
 }
 .slick-dots li {
-  margin: 0 0.25rem;
+  margin: 0 0.3rem !important;
   background: #444;
   border-radius: 50%;
+  width: 8px !important;
+  height: 8px !important;
+  border: none !important;
+
 }
 .slick-dots button {
   display: block;
-  width: 16px;
-  height: 16px;
-  padding: 0;
-  border: none;
+  width: 8px !important;
+  height: 8px !important;
+  padding: 1px 0px !important;
+  border: none !important;
   border-radius: 50%;
+  
 }
 .slick-dots li.slick-active button {
   background-color: #f68426;
+}
+.slick-dots li.slick-active button::before {
+  color: transparent !important;
+}
+.slick-dots li button::before{
+  color: transparent !important;
+}
+@media (max-width: 768px) {
+  .banner_note {
+    font-size: 8px;
+    letter-spacing: 8px;
+  }
+  .banner_main {
+    font-size: 20px;
+    letter-spacing: 20px;
+    /* padding-left: 30px !important; */
+  }
+  .home_carousel_text {
+    font-size: 10px;
+  }
+  .banner_subtitle {
+    font-size: 15px;
+    margin-top: 40px !important;
+  }
+  .icons {
+    font-size: 10px !important;
+  }
+  .input-cont {
+    margin-top: 10px;
+    height: 40px;
+  }
+  .banner_email_btn {
+    height: 40px;
+    line-height: 5px !important;
+  }
+}
+@media (max-width: 390px) {
+  .banner_note {
+    letter-spacing: 5px;
+  }
+  .banner_main {
+    font-size: 18px;
+    letter-spacing: 17px;
+    padding-left: 18px !important;
+  }
+  .banner_subtitle {
+    font-size: 12px;
+    margin-top: 40px !important;
+  }
+  .banner_footer_title {
+    font-size: 10px;
+  }
+}
+@media (max-width: 320px) {
+  .banner_subtitle {
+    font-size: 10px;
+    margin-top: 40px !important;
+  }
+  .banner_footer_title {
+    font-size: 10px;
+  }
+  .banner_main {
+    letter-spacing: 11px;
+    font-size: 20px;
+    padding-left: 18px !important;
+  }
+  .banner_note {
+    letter-spacing: 3px;
+  }
 }

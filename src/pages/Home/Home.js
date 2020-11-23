@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Header/index";
 import emailjs from "emailjs-com";
@@ -10,15 +10,12 @@ import img from "../../assets/images/carousel-img.png";
 import img2 from "../../assets/images/carousel-img2.png";
 import img3 from "../../assets/images/carousel-img3.png";
 import img1 from "../../assets/images/carousel-img1.png";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaCheckCircle,
-} from "react-icons/fa";
+import ToastContainer from "../../components/ToastNotification/Toast";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { toast } from "react-toastify";
 
 const data = [
   {
@@ -57,7 +54,7 @@ const settings = {
 const carouselList = data.map((data, index) => (
   <div key={index}>
     <CarouselItem img={data.img} />
-    <h1 className="text-center text-white-50 home_carousel_text mt-4">
+    <h1 className="text-center text-white-50 home_carousel_text mt-2">
       {data.text}
     </h1>
   </div>
@@ -66,9 +63,40 @@ const carouselList = data.map((data, index) => (
 const Home = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(undefined);
+  const [error, setError] = useState(undefined);
+
+  const toasts = () =>
+    toast.success(<ToastContainer title="Thank you for subscribing" />, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  const Errortoasts = (error) =>
+    toast.error(<ToastContainer title={error} error/>, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  useEffect(() => {
+    if (status) {
+      return toasts();
+    }
+    if (error) {
+      return Errortoasts(error.text)
+    }
+    
+  }, [status]);
   function sendEmail(e) {
     e.preventDefault();
-
+    setStatus(undefined);
     emailjs
       .sendForm(
         process.env.REACT_APP_GMAIL_SERVICE_CODE,
@@ -81,25 +109,23 @@ const Home = () => {
           setStatus(true);
         },
         (error) => {
-          console.log(error.text);
+          setError(error.text)
         }
       );
     setEmail("");
+    // setStatus(undefined)
   }
 
   return (
     <>
-      <Container fluid>
+      <Container fluid className="w-full">
         <Header />
         <Row className=" home">
-          <Col xs={12} className="mx-auto mt-5">
+          <Col xs={12} className="mx-auto mt-2">
             <h1 className="text-center banner_note text-white-50">
               Site under Construction
             </h1>
-            <h2
-              className="text-white text-center leading-4 banner_main pt-3"
-              animate={{ color: "#400", opacity: 0.8 }}
-            >
+            <h2 className="text-white text-center banner_main pt-1 mx-auto">
               COMING SOON
             </h2>
             <Col as="div" className="carousel_main_container ">
@@ -109,10 +135,16 @@ const Home = () => {
                 {carouselList}
               </Slider>
             </Col>
-            <Col as="div" className="mt-5 banner_subtitle_container">
+            <Col as="div" className="mt-1 banner_subtitle_container">
               <h2 className="text-center banner_subtitle ">
                 Join us in making music fun again
               </h2>
+
+              {/* {status && (
+                <Message variant="success">
+                  Success: Thank you for subscribing
+                </Message>
+              )} */}
               <Col as="div" className="mx-auto input-cont">
                 <form
                   onSubmit={sendEmail}
@@ -123,7 +155,6 @@ const Home = () => {
                     className="banner_input"
                     placeholder="Enter Your Email"
                     required
-                    className="banner_input"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -131,13 +162,9 @@ const Home = () => {
                   <button
                     className="banner_email_btn"
                     type="submit"
-                    disabled={!email }
+                    disabled={email === ""}
                   >
-                    {!status ? (
-                      "SEND"
-                    ) : (
-                      <FaCheckCircle color="green" size={20} />
-                    )}
+                    SEND
                   </button>
                 </form>
               </Col>
@@ -146,11 +173,11 @@ const Home = () => {
                   stay in contact
                 </h2>
                 <div className="icon-flex">
-                  <FaFacebook size={28} color="#444" className="icons" />
+                  <FaFacebook size={24} color="#444" className="icons" />
 
-                  <FaTwitter size={28} color="#444" className="icons" />
+                  <FaTwitter size={24} color="#444" className="icons" />
 
-                  <FaInstagram size={28} color="#444" className="icons" />
+                  <FaInstagram size={24} color="#444" className="icons" />
                 </div>
               </Col>
             </Col>
